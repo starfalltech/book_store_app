@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../authentication/presentation/pages/login_page.dart';
+
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({super.key});
 
@@ -39,7 +41,12 @@ class OnBoardingPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()));
+                        },
                         style: ElevatedButton.styleFrom(
                           elevation: 16,
                           shadowColor:
@@ -108,7 +115,9 @@ class OnBoardingPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -129,7 +138,9 @@ class OnBoardingPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: ElevatedButton(
@@ -150,15 +161,17 @@ class OnBoardingPage extends StatelessWidget {
                                   fontSize: 20,
                                   color: const Color(0xffD89E46)),
                             ),
-
                             Padding(
                               padding: const EdgeInsets.only(left: 11.0),
-                              child: SvgPicture.asset('assets/icons/icon_play.svg'),
+                              child: SvgPicture.asset(
+                                  'assets/icons/icon_play.svg'),
                             )
                           ],
                         )),
                   ),
-                  const SizedBox(height: 21,),
+                  const SizedBox(
+                    height: 21,
+                  ),
                 ],
               ),
             ),

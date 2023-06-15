@@ -62,7 +62,7 @@ class AppThemeData {
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(color: Colors.white, size: 14.sp),
           elevation: 0,
-          backgroundColor: ColorValue.primary,
+          backgroundColor: Colors.white,
           titleTextStyle:
               GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: 7.sp),
           toolbarTextStyle:
