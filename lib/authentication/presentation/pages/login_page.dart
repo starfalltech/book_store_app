@@ -25,9 +25,8 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
             child: SizedBox(
-              height: 100.h,
+              height: 100.h-30,
               child: Form(
                 key: _formKey,
                 child: Column(
