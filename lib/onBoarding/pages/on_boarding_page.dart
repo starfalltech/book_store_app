@@ -1,3 +1,4 @@
+import 'package:book_store_app/onBoarding/pages/select_language_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -151,7 +152,11 @@ class OnBoardingPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: ElevatedButton(
                         onPressed: () {
-
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const SelectLanguagePage(),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,

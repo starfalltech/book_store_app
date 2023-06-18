@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
@@ -6,14 +5,14 @@ import 'package:sizer/sizer.dart';
 class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBarWidget(
       {Key? key,
-        this.title,
-        this.actions,
-        this.toolbarHeight,
-        this.backgroundColor,
-        this.bottom,
-        this.automaticallyImplyLeading = true,
-        this.leading,
-        this.backButtonPressed})
+      this.title,
+      this.actions,
+      this.toolbarHeight,
+      this.backgroundColor,
+      this.bottom,
+      this.automaticallyImplyLeading = true,
+      this.leading,
+      this.backButtonPressed})
       : super(key: key);
   final Widget? title, leading;
   final List<Widget>? actions;
@@ -29,12 +28,9 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   @override
   // TODO: implement preferredSize
   Size get preferredSize => const Size(double.infinity, 61);
-
 }
 
 class _CustomAppBarState extends State<CustomAppBarWidget> {
-
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -42,11 +38,11 @@ class _CustomAppBarState extends State<CustomAppBarWidget> {
       automaticallyImplyLeading: widget.automaticallyImplyLeading,
       leading: widget.automaticallyImplyLeading
           ? IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: SvgPicture.asset('assets/icons/icon_arrow_left.svg',
-              width: 6.w))
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: SvgPicture.asset('assets/icons/icon_arrow_left.svg',
+                  width: 6.w))
           : null,
       title: widget.title,
       actions: widget.actions,

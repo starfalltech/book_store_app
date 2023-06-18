@@ -33,7 +33,8 @@ class AppThemeData {
             style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 36.sp),
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.sp)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.sp)),
                 textStyle: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -59,14 +60,20 @@ class AppThemeData {
             fontSize: 8.sp,
           ),
         ),
+        radioTheme: RadioThemeData(
+            fillColor: MaterialStateColor.resolveWith(
+                (states) => const Color(0xff2667FF))),
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(color: Colors.white, size: 14.sp),
           elevation: 0,
           backgroundColor: Colors.white,
-          titleTextStyle:
-              GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: 7.sp),
+          titleTextStyle: GoogleFonts.urbanist(
+            fontWeight: FontWeight.w700,
+            fontSize: 20,
+            color: const Color(0xff0B090A),
+          ),
           toolbarTextStyle:
-              GoogleFonts.poppins(fontWeight: FontWeight.w700, fontSize: 7.sp),
+              GoogleFonts.urbanist(fontWeight: FontWeight.w700, fontSize: 7.sp),
         ),
         textTheme: GoogleFonts.urbanistTextTheme());
   }
