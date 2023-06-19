@@ -152,14 +152,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        final nameuser = email.text.split("@");
-                        String emailcaracter=email.text.replaceRange(2,nameuser[0].length,"*" * (nameuser[0].length-2));
-                        print(emailcaracter);
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => VerifyPage(
-                                    email: emailcaracter
+                                    email: email.text
                                   )),
                         );
                       }

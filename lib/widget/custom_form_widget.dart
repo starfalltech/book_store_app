@@ -5,10 +5,15 @@ class CustomFormWidget extends StatelessWidget {
   final String? hint;
   final TextEditingController? controller;
   final bool obsecure;
-  final TextInputType?inputType;
+  final bool isOpsional;
+  final TextInputType? inputType;
 
   const CustomFormWidget(
-      {super.key, this.hint, this.controller, required this.obsecure, this.inputType});
+      {super.key,
+      this.hint,
+      this.controller,
+      required this.obsecure,
+      this.inputType, this.isOpsional=true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,9 @@ class CustomFormWidget extends StatelessWidget {
       keyboardType: inputType,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter some text';
+          if(isOpsional){
+            return 'Please enter some text';
+          }
         }
         return null;
       },
@@ -31,7 +38,18 @@ class CustomFormWidget extends StatelessWidget {
         contentPadding: const EdgeInsets.only(top: 16, bottom: 16, left: 20),
         isDense: true,
         hintText: hint,
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color(0xffE9ECEF),
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(30),
+        ),
         border: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: Color(0xffE9ECEF),
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(30),
         ),
       ),

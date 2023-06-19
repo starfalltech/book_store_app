@@ -1,3 +1,4 @@
+import 'package:book_store_app/clientDashboard/presentation/pages/home_client_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,13 +20,16 @@ class _VerifyPageState extends State<VerifyPage> {
 
   @override
   Widget build(BuildContext context) {
+    final nameuser = widget.email.split("@");
+    String emailcaracter = widget.email
+        .replaceRange(2, nameuser[0].length, "*" * (nameuser[0].length - 2));
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: SizedBox(
-            height: 100.h-10,
+            height: 100.h - 10,
             child: Column(
               children: [
                 const SizedBox(
@@ -55,7 +59,7 @@ class _VerifyPageState extends State<VerifyPage> {
                           color: const Color(0xff848588)),
                       children: [
                         TextSpan(
-                          text: widget.email,
+                          text: emailcaracter,
                           style: GoogleFonts.urbanist(
                             fontWeight: FontWeight.w700,
                             fontSize: 16,
@@ -75,7 +79,12 @@ class _VerifyPageState extends State<VerifyPage> {
                   height: 30,
                 ),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>const  HomeClientPage()));
+                    },
                     child: Text(
                       "Verify",
                       style: GoogleFonts.urbanist(
@@ -91,7 +100,8 @@ class _VerifyPageState extends State<VerifyPage> {
                   child: RichText(
                     textAlign: TextAlign.left,
                     text: TextSpan(
-                        text: "It may take a minute to receive your code.\nHaven’t received it? ",
+                        text:
+                            "It may take a minute to receive your code.\nHaven’t received it? ",
                         style: GoogleFonts.urbanist(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
