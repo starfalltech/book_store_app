@@ -102,11 +102,11 @@ class HomeClientPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => OrderHistoryPage(),
+                              builder: (context) => const OrderHistoryPage(),
                             ),
                           );
                         },
-                        child: CardTransactionWidget(),
+                        child: const CardTransactionWidget(),
                       );
                     }),
               )

@@ -1,3 +1,4 @@
+import 'package:book_store_app/placeOrder/presentation/pages/checkout_page.dart';
 import 'package:book_store_app/widget/custom_appbar_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +118,7 @@ class _BookAndSuppliesPageState extends State<BookAndSuppliesPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BookAndSuppliesPage()));
+                          builder: (context) => const CheckoutPage()));
                 },
                 child: Text(
                   "Proceed",

@@ -60,11 +60,7 @@ class AppThemeData {
             fontSize: 8.sp,
           ),
         ),
-        radioTheme: RadioThemeData(
-            fillColor: MaterialStateColor.resolveWith(
-                (states) => const Color(0xff2667FF))),
         appBarTheme: AppBarTheme(
-
           iconTheme: IconThemeData(color: Colors.white, size: 14.sp),
           elevation: 0,
           backgroundColor: Colors.white,

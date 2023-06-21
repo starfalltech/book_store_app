@@ -51,7 +51,7 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
                   controller: controller,
                   children: [
                     AddessPlaceOrderWidget(controller: controller),
-                    ChildDetailsPlaceOrderWidget(),
+                    const ChildDetailsPlaceOrderWidget(),
                   ],
                 ),
               ),
