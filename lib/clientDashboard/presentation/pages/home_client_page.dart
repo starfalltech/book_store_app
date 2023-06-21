@@ -1,4 +1,5 @@
 import 'package:book_store_app/clientDashboard/presentation/pages/order_history_page.dart';
+import 'package:book_store_app/placeOrder/presentation/pages/place_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,7 +53,16 @@ class HomeClientPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Image.asset("assets/images/order_dashboard.png"),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PlaceOrderPage(),
+                      ));
+                },
+                child: Image.asset("assets/images/order_dashboard.png"),
+              ),
               const SizedBox(
                 height: 20,
               ),

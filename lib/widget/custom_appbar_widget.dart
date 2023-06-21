@@ -43,7 +43,7 @@ class _CustomAppBarState extends State<CustomAppBarWidget> {
               },
               icon: SvgPicture.asset('assets/icons/icon_arrow_left.svg',
                   width: 6.w))
-          : null,
+          : widget.leading,
       title: widget.title,
       actions: widget.actions,
       toolbarHeight: widget.toolbarHeight,
