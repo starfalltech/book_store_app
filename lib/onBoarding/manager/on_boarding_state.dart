@@ -9,3 +9,5 @@ abstract class OnBoardingState extends Equatable {
 class OnBoardingInitial extends OnBoardingState {}
 
 class SuccesOnBoardingState extends OnBoardingState {}
+
+class FailureOnBoardingState extends OnBoardingState{}

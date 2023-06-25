@@ -7,13 +7,16 @@ class CustomFormWidget extends StatelessWidget {
   final bool obsecure;
   final bool isOpsional;
   final TextInputType? inputType;
+  final FormFieldValidator<String>? validation;
 
   const CustomFormWidget(
       {super.key,
       this.hint,
       this.controller,
+      this.validation,
       required this.obsecure,
-      this.inputType, this.isOpsional=true});
+      this.inputType,
+      this.isOpsional = true});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +24,9 @@ class CustomFormWidget extends StatelessWidget {
       controller: controller,
       obscureText: obsecure,
       keyboardType: inputType,
-      validator: (value) {
+      validator:validation ?? (value) {
         if (value == null || value.isEmpty) {
-          if(isOpsional){
+          if (isOpsional) {
             return 'Please enter some text';
           }
         }

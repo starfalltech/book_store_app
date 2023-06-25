@@ -6,7 +6,7 @@ class LoadingSpinWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpinKitFadingCircle(
+    return const SpinKitFadingCircle(
       color: Colors.white,
       size: 50.0,
     );

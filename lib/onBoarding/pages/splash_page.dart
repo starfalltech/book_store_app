@@ -1,4 +1,5 @@
 
+import 'package:book_store_app/clientDashboard/presentation/pages/home_client_page.dart';
 import 'package:book_store_app/widget/loading_spin_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ class SplashPage extends StatelessWidget {
             if (state is SuccesOnBoardingState) {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => const OnBoardingPage(),
+                  builder: (context) => const HomeClientPage(),
                 ),
               );
             }

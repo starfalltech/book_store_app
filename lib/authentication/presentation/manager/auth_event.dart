@@ -9,9 +9,17 @@ abstract class AuthEvent extends Equatable {
 
 
 class LoginEvent extends AuthEvent{
+  final String email;
+  final String password;
 
+  LoginEvent(this.email, this.password);
 }
 
 class RegisterEvent extends AuthEvent{
+  final String email;
+  final String name;
+  final String cell;
+  final String passsword;
 
+  RegisterEvent(this.email, this.name, this.cell, this.passsword);
 }
