@@ -14,6 +14,12 @@ class LoginEvent extends AuthEvent{
 
   LoginEvent(this.email, this.password);
 }
+class PostVerify extends AuthEvent{
+  final String email;
+  final String code;
+
+  PostVerify(this.email, this.code);
+}
 
 class RegisterEvent extends AuthEvent{
   final String email;

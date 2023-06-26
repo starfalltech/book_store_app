@@ -8,11 +8,14 @@ import 'package:http/http.dart' as http;
 abstract class AuthenticationRemoteDataSources {
   Future<String> login(String email, String password);
 
+  Future<String> verify(String email, String code);
+
   Future<String> register(
       String name, String email, String password, String cell);
 }
 
-class AuthenticationRemoteDataSourcesImpl extends AuthenticationRemoteDataSources {
+class AuthenticationRemoteDataSourcesImpl
+    extends AuthenticationRemoteDataSources {
   final http.Client client;
 
   AuthenticationRemoteDataSourcesImpl(this.client);
@@ -39,7 +42,7 @@ class AuthenticationRemoteDataSourcesImpl extends AuthenticationRemoteDataSource
 
   @override
   Future<String> register(
-      String name, String email, String password, String cell) async{
+      String name, String email, String password, String cell) async {
     final body = {
       "password": password,
       "email": email,
@@ -53,7 +56,29 @@ class AuthenticationRemoteDataSourcesImpl extends AuthenticationRemoteDataSource
       final res = userEntityFromJson(response.body);
       if (res.response.error != '1') {
         final token = jsonDecode(response.body);
-        return token["response"]["Token"];
+        return token["response"]["token"];
+      } else {
+        throw ServerException(res.response.message);
+      }
+    } else {
+      throw ServerException(response.reasonPhrase.toString());
+    }
+  }
+
+  @override
+  Future<String> verify(String email, String code) async{
+    final body = {
+      "code": code,
+      "email": email
+    };
+    final response = await client.post(
+        Uri.parse("${ConstantValue.apiUrl}users/verify"),
+        body: jsonEncode(body));
+    if (response.statusCode == 200) {
+      final res = userEntityFromJson(response.body);
+      if (res.response.error != '1') {
+        final token = jsonDecode(response.body);
+        return token["response"]["token"];
       } else {
         throw ServerException(res.response.message);
       }

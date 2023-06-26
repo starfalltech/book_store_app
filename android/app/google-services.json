@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "793325292131",
+    "project_id": "castlewalk-fe330",
+    "storage_bucket": "castlewalk-fe330.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793325292131:android:843df7f74c4abd49cac656",
+        "android_client_info": {
+          "package_name": "com.example.book_store_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793325292131-db7ssen8qksqainnir86j3q2v2dvbt3f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0CWkOU4b1SQsfFreRpZrFiFlDYUe7dhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793325292131-db7ssen8qksqainnir86j3q2v2dvbt3f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

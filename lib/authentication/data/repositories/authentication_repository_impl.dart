@@ -44,4 +44,18 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       return Left(InternalFailure('You are Offline !'));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> verify(String email, String code) async {
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSources.verify(email, code);
+        return const Right(true);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.msg));
+      }
+    } else {
+      return Left(InternalFailure('You are Offline !'));
+    }
+  }
 }

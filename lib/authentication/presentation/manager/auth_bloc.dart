@@ -17,12 +17,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required this.repository}) : super(AuthInitial()) {
     on<LoginEvent>(loginEventToState);
     on<RegisterEvent>(registerEventToState);
+    on<PostVerify>(verifyMapToState);
   }
 
-  FutureOr<void> loginEventToState(LoginEvent event, Emitter<AuthState> emit) async{
+  FutureOr<void> loginEventToState(
+      LoginEvent event, Emitter<AuthState> emit) async {
     emit(LoadingAuthState());
-    final postRegister =
-        await repository.login(event.email, event.password);
+    final postRegister = await repository.login(event.email, event.password);
     postRegister.fold((l) {
       if (l is ServerFailure) {
         emit(FailureAuthState(l.msg));
@@ -33,8 +34,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> registerEventToState(
       RegisterEvent event, Emitter<AuthState> emit) async {
     emit(LoadingAuthState());
-    final postRegister =
-        await repository.register(event.email, event.passsword, event.cell, event.name);
+    final postRegister = await repository.register(
+        event.email, event.passsword, event.cell, event.name);
+    postRegister.fold((l) {
+      if (l is ServerFailure) {
+        emit(FailureAuthState(l.msg));
+      }
+    }, (r) => emit(SuccesAuthState()));
+  }
+
+  FutureOr<void> verifyMapToState(PostVerify event, Emitter<AuthState> emit) async{
+    emit(LoadingAuthState());
+    final postRegister = await repository.verify(event.email, event.code);
     postRegister.fold((l) {
       if (l is ServerFailure) {
         emit(FailureAuthState(l.msg));

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomFormWidget extends StatelessWidget {
@@ -7,6 +8,7 @@ class CustomFormWidget extends StatelessWidget {
   final bool obsecure;
   final bool isOpsional;
   final TextInputType? inputType;
+  final List<TextInputFormatter>? inputFormaters;
   final FormFieldValidator<String>? validation;
 
   const CustomFormWidget(
@@ -14,6 +16,7 @@ class CustomFormWidget extends StatelessWidget {
       this.hint,
       this.controller,
       this.validation,
+      this.inputFormaters,
       required this.obsecure,
       this.inputType,
       this.isOpsional = true});
@@ -23,15 +26,17 @@ class CustomFormWidget extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obsecure,
+      inputFormatters: inputFormaters,
       keyboardType: inputType,
-      validator:validation ?? (value) {
-        if (value == null || value.isEmpty) {
-          if (isOpsional) {
-            return 'Please enter some text';
-          }
-        }
-        return null;
-      },
+      validator: validation ??
+          (value) {
+            if (value == null || value.isEmpty) {
+              if (isOpsional) {
+                return 'Please enter some text';
+              }
+            }
+            return null;
+          },
       decoration: InputDecoration(
         hintStyle: GoogleFonts.urbanist(
           color: const Color(0xffB5B6B8),

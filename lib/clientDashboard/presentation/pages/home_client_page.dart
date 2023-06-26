@@ -1,8 +1,11 @@
 import 'package:book_store_app/clientDashboard/presentation/pages/order_history_page.dart';
+import 'package:book_store_app/core/local_auth_storage.dart';
+import 'package:book_store_app/onBoarding/pages/on_boarding_page.dart';
 import 'package:book_store_app/placeOrder/presentation/pages/place_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../widget/card_transaction_widget.dart';
 
@@ -47,6 +50,58 @@ class HomeClientPage extends StatelessWidget {
                             color: Colors.black),
                       ),
                     ],
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: 20.w,
+                    height: 30,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AlertDialog(
+                                title: const Text("Logout"),
+                                content: const Text(
+                                    "are you sure you want to logout ?"),
+                                actions: [
+                                  SizedBox(
+                                    height: 40,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.white),
+                                            child: const Text("Cancel",
+                                              style: TextStyle(
+                                                  color: Colors.black),),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: ElevatedButton(
+                                              onPressed: () async {
+                                                await LocalAuthStorage()
+                                                    .delete()
+                                                    .then((value) =>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const
+                                                OnBoardingPage())));
+                                              }, child: const Text("Yes")),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                        );
+                      },
+                      child: const Text("Logout"),
+                    ),
                   )
                 ],
               ),
@@ -93,9 +148,10 @@ class HomeClientPage extends StatelessWidget {
                 child: ListView.separated(
                     itemCount: 2,
                     shrinkWrap: true,
-                    separatorBuilder: (context, i) => const SizedBox(
-                          height: 10,
-                        ),
+                    separatorBuilder: (context, i) =>
+                    const SizedBox(
+                      height: 10,
+                    ),
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {

@@ -24,6 +24,12 @@ class SplashPage extends StatelessWidget {
                   builder: (context) => const HomeClientPage(),
                 ),
               );
+            }else{
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const OnBoardingPage(),
+                ),
+              );
             }
           },
           child: Stack(

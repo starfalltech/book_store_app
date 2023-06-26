@@ -54,168 +54,173 @@ class _LoginPageState extends State<LoginPage> {
           },
           child: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
-              return SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: SingleChildScrollView(
-                    child: SizedBox(
-                      height: 100.h - 30,
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            SvgPicture.asset(
-                                "assets/icons/icon_book_brown.svg"),
-                            Text(
-                              "Login",
-                              style: GoogleFonts.urbanist(
-                                  fontWeight: FontWeight.w700, fontSize: 26),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "Login to access your account.",
-                              style: GoogleFonts.urbanist(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  color: const Color(0xff848588)),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            CustomFormWidget(
-                              controller: email,
-                              hint: "Email or phone no.",
-                              obsecure: false,
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            CustomFormWidget(
-                              controller: password,
-                              hint: "Password",
-                              obsecure: true,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'Forgot Password?',
-                                style: GoogleFonts.urbanist(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xff2176FF)),
+              return GestureDetector(
+                onTap: (){
+                  FocusScope.of(context).unfocus();
+                },
+                child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: SingleChildScrollView(
+                      child: SizedBox(
+                        height: 100.h - 30,
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              const SizedBox(
+                                height: 30,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    context.read<AuthBloc>().add(
-                                        LoginEvent(email.text, password.text));
-                                  }
-                                },
-                                child: Text(
-                                  "Login",
-                                  style: GoogleFonts.urbanist(
-                                    fontWeight: FontWeight.w700,
+                              SvgPicture.asset(
+                                  "assets/icons/icon_book_brown.svg"),
+                              Text(
+                                "Login",
+                                style: GoogleFonts.urbanist(
+                                    fontWeight: FontWeight.w700, fontSize: 26),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Login to access your account.",
+                                style: GoogleFonts.urbanist(
                                     fontSize: 18,
-                                  ),
-                                )),
-                            const SizedBox(
-                              height: 39.5,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25.0),
-                              child: Row(
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color(0xff848588)),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              CustomFormWidget(
+                                controller: email,
+                                hint: "Email or phone no.",
+                                obsecure: false,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              CustomFormWidget(
+                                controller: password,
+                                hint: "Password",
+                                obsecure: true,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  'Forgot Password?',
+                                  style: GoogleFonts.urbanist(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: const Color(0xff2176FF)),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      context.read<AuthBloc>().add(
+                                          LoginEvent(email.text, password.text));
+                                    }
+                                  },
+                                  child: Text(
+                                    "Login",
+                                    style: GoogleFonts.urbanist(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 18,
+                                    ),
+                                  )),
+                              const SizedBox(
+                                height: 39.5,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 25.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Divider(
+                                        thickness: 1,
+                                        color: const Color(0xff5C677D)
+                                            .withOpacity(0.25),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 11,
+                                    ),
+                                    const Text(
+                                      "or",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Color(0xff5C677D)),
+                                    ),
+                                    const SizedBox(
+                                      width: 11,
+                                    ),
+                                    Expanded(
+                                      child: Divider(
+                                        thickness: 1,
+                                        color: const Color(0xff5C677D)
+                                            .withOpacity(0.25),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Expanded(
-                                    child: Divider(
-                                      thickness: 1,
-                                      color: const Color(0xff5C677D)
-                                          .withOpacity(0.25),
-                                    ),
+                                  Image.asset(
+                                    "assets/images/apple_sign.png",
+                                    width: 80,
+                                    height: 80,
                                   ),
-                                  const SizedBox(
-                                    width: 11,
+                                  Image.asset(
+                                    "assets/images/fb_sign.png",
+                                    width: 80,
+                                    height: 80,
                                   ),
-                                  const Text(
-                                    "or",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xff5C677D)),
-                                  ),
-                                  const SizedBox(
-                                    width: 11,
-                                  ),
-                                  Expanded(
-                                    child: Divider(
-                                      thickness: 1,
-                                      color: const Color(0xff5C677D)
-                                          .withOpacity(0.25),
-                                    ),
+                                  Image.asset(
+                                    "assets/images/google_sign.png",
+                                    width: 80,
+                                    height: 80,
                                   ),
                                 ],
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/images/apple_sign.png",
-                                  width: 80,
-                                  height: 80,
-                                ),
-                                Image.asset(
-                                  "assets/images/fb_sign.png",
-                                  width: 80,
-                                  height: 80,
-                                ),
-                                Image.asset(
-                                  "assets/images/google_sign.png",
-                                  width: 80,
-                                  height: 80,
-                                ),
-                              ],
-                            ),
-                            const Spacer(),
-                            RichText(
-                              text: TextSpan(
-                                  text: "Don’t have an account?",
-                                  style: GoogleFonts.urbanist(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: const Color(0xff848588)),
-                                  children: [
-                                    TextSpan(
-                                      text: " Sign Up",
-                                      style: GoogleFonts.urbanist(
-                                        fontWeight: FontWeight.w700,
+                              const Spacer(),
+                              RichText(
+                                text: TextSpan(
+                                    text: "Don’t have an account?",
+                                    style: GoogleFonts.urbanist(
+                                        fontWeight: FontWeight.w500,
                                         fontSize: 16,
-                                        color: const Color(0xff2176FF),
-                                      ),
-                                    )
-                                  ]),
-                            ),
-                            const SizedBox(
-                              height: 34,
-                            ),
-                          ],
+                                        color: const Color(0xff848588)),
+                                    children: [
+                                      TextSpan(
+                                        text: " Sign Up",
+                                        style: GoogleFonts.urbanist(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16,
+                                          color: const Color(0xff2176FF),
+                                        ),
+                                      )
+                                    ]),
+                              ),
+                              const SizedBox(
+                                height: 34,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
