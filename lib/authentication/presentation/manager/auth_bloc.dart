@@ -18,6 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>(loginEventToState);
     on<RegisterEvent>(registerEventToState);
     on<PostVerify>(verifyMapToState);
+    on<SignInGoogle>(signGoogleMapToState);
   }
 
   FutureOr<void> loginEventToState(
@@ -46,6 +47,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> verifyMapToState(PostVerify event, Emitter<AuthState> emit) async{
     emit(LoadingAuthState());
     final postRegister = await repository.verify(event.email, event.code);
+    postRegister.fold((l) {
+      if (l is ServerFailure) {
+        emit(FailureAuthState(l.msg));
+      }
+    }, (r) => emit(SuccesAuthState()));
+  }
+
+  FutureOr<void> signGoogleMapToState(SignInGoogle event, Emitter<AuthState> emit) async{
+    emit(LoadingAuthState());
+    final postRegister = await repository.signWithGoogle();
     postRegister.fold((l) {
       if (l is ServerFailure) {
         emit(FailureAuthState(l.msg));

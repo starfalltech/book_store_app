@@ -9,9 +9,26 @@ import 'package:sizer/sizer.dart';
 
 import '../../../widget/card_transaction_widget.dart';
 
-class HomeClientPage extends StatelessWidget {
+class HomeClientPage extends StatefulWidget {
   const HomeClientPage({super.key});
 
+  @override
+  State<HomeClientPage> createState() => _HomeClientPageState();
+}
+
+class _HomeClientPageState extends State<HomeClientPage> {
+
+  String greeting() {
+    var hour = DateTime.now().hour;
+
+    if (hour < 12) {
+      return 'Morning';
+    }
+    if (hour < 17) {
+      return 'Afternoon';
+    }
+    return 'Evening';
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +53,7 @@ class HomeClientPage extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        "Good Morning",
+                        "Good ${greeting()}",
                         style: GoogleFonts.urbanist(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

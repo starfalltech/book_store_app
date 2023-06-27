@@ -13,4 +13,6 @@ abstract class AuthenticationRepository {
     String cell,
     String name,
   );
+
+  Future<Either<Failure,bool>> signWithGoogle();
 }

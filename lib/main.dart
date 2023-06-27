@@ -4,6 +4,7 @@ import 'package:book_store_app/authentication/domain/repositories/authentication
 import 'package:book_store_app/core/app_theme_data.dart';
 import 'package:book_store_app/widget/loading_spin_widget.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -14,7 +15,9 @@ import 'bloc_observer.dart';
 import 'core/network_info.dart';
 import 'onBoarding/pages/splash_page.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }

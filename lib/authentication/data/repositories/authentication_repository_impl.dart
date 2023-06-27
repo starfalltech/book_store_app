@@ -58,4 +58,18 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       return Left(InternalFailure('You are Offline !'));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> signWithGoogle() async{
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSources.signWithGoogle();
+        return const Right(true);
+      } on ServerException catch (e) {
+        return Left(ServerFailure(e.msg));
+      }
+    } else {
+      return Left(InternalFailure('You are Offline !'));
+    }
+  }
 }
