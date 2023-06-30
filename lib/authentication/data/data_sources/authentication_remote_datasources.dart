@@ -14,8 +14,8 @@ abstract class AuthenticationRemoteDataSources {
 
   Future<String> verify(String email, String code);
 
-  Future<String> register(String name, String email, String password,
-      String cell);
+  Future<String> register(
+      String name, String email, String password, String cell);
 }
 
 class AuthenticationRemoteDataSourcesImpl
@@ -45,8 +45,8 @@ class AuthenticationRemoteDataSourcesImpl
   }
 
   @override
-  Future<String> register(String name, String email, String password,
-      String cell) async {
+  Future<String> register(
+      String name, String email, String password, String cell) async {
     final body = {
       "password": password,
       "email": email,
@@ -91,46 +91,22 @@ class AuthenticationRemoteDataSourcesImpl
   @override
   Future<String> signWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    if (googleUser?.email != null) {
-      FirebaseAuth auth = FirebaseAuth.instance;
-      List<String> signInMethods =
-      await auth.fetchSignInMethodsForEmail(googleUser!.email);
-      if (signInMethods.isEmpty) {
-        final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
-        final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
-        final userfirebase =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-        return await register(
-            userfirebase.user?.displayName ??
-                googleUser!
-                    .email
-                    .split("@")
-                    .first,
-            googleUser.email,
-            userfirebase.credential?.accessToken ?? '',
-            userfirebase.user?.phoneNumber ?? "0444");
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    final body = {"authToken": googleAuth?.idToken, "email": googleUser?.email};
+    final response = await client.post(
+        Uri.parse("${ConstantValue.apiUrl}thirdparty/socialSignIn"),
+        body: jsonEncode(body));
+    if (response.statusCode == 200) {
+      final res = userEntityFromJson(response.body);
+      if (res.response.error != '1') {
+        final token = jsonDecode(response.body);
+        return token["response"]["token"];
       } else {
-        final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
-
-        final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        );
-        final userfirebase =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-        return await login(
-          googleUser.email,
-          userfirebase.credential?.accessToken ?? '',
-        );
+        throw ServerException(res.response.message);
       }
     } else {
-      throw "UnAuthenticated";
+      throw ServerException(response.reasonPhrase.toString());
     }
   }
 }

@@ -229,6 +229,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
+                                        backgroundColor: Colors.red,
                                         content: Text(
                                             'please select I agree to the Terms & Condition'),
                                       ),
@@ -296,10 +297,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                   width: 80,
                                   height: 80,
                                 ),
-                                Image.asset(
-                                  "assets/images/google_sign.png",
-                                  width: 80,
-                                  height: 80,
+                                GestureDetector(
+                                  onTap: (){
+                                    context.read<AuthBloc>().add(SignInGoogle());
+                                  },
+                                  child: Image.asset(
+                                    "assets/images/google_sign.png",
+                                    width: 80,
+                                    height: 80,
+                                  ),
                                 ),
                               ],
                             ),

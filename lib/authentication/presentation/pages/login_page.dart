@@ -125,6 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                               ElevatedButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
+                                      FocusScope.of(context).unfocus();
                                       context.read<AuthBloc>().add(
                                           LoginEvent(email.text, password.text));
                                     }
@@ -190,10 +191,15 @@ class _LoginPageState extends State<LoginPage> {
                                     width: 80,
                                     height: 80,
                                   ),
-                                  Image.asset(
-                                    "assets/images/google_sign.png",
-                                    width: 80,
-                                    height: 80,
+                                  GestureDetector(
+                                    onTap: (){
+                                      context.read<AuthBloc>().add(SignInGoogle());
+                                    },
+                                    child: Image.asset(
+                                      "assets/images/google_sign.png",
+                                      width: 80,
+                                      height: 80,
+                                    ),
                                   ),
                                 ],
                               ),
