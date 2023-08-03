@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:book_store_app/authentication/domain/entities/user_entity.dart';
 import 'package:book_store_app/core/constant_value.dart';
 import 'package:book_store_app/core/exceptions.dart';
+import 'package:book_store_app/core/local_auth_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,9 +35,11 @@ class AuthenticationRemoteDataSourcesImpl
     if (response.statusCode == 200) {
       final res = userEntityFromJson(response.body);
       if (res.response.error != '1') {
-        final token = jsonDecode(response.body);
-        print(token["response"]["Token"]);
-        return token["response"]["Token"];
+        final decode = jsonDecode(response.body);
+        debugPrint(decode.toString());
+        await LocalAuthStorage().write("email", decode['response']["User"]["cu_email"]);
+        await LocalAuthStorage().write("ref", decode['response']["User"]["cu_reference"]);
+        return decode["response"]["Token"];
       } else {
         throw ServerException(res.response.message);
       }

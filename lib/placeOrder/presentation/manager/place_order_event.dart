@@ -10,3 +10,9 @@ abstract class PlaceOrderEvent extends Equatable{
 class UpdateparentInfo extends PlaceOrderEvent{
 
 }
+
+class PostPayment extends PlaceOrderEvent{
+  final int ammout;
+
+  PostPayment(this.ammout);
+}

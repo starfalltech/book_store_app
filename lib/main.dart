@@ -2,6 +2,9 @@ import 'package:book_store_app/authentication/data/data_sources/authentication_r
 import 'package:book_store_app/authentication/data/repositories/authentication_repository_impl.dart';
 import 'package:book_store_app/authentication/domain/repositories/authentication_repository.dart';
 import 'package:book_store_app/core/app_theme_data.dart';
+import 'package:book_store_app/placeOrder/data/data_sources/place_order_remote_datasource.dart';
+import 'package:book_store_app/placeOrder/data/repositories/place_order_repository_impl.dart';
+import 'package:book_store_app/placeOrder/domain/repositories/place_order_repository.dart';
 import 'package:book_store_app/widget/loading_spin_widget.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,7 +18,7 @@ import 'bloc_observer.dart';
 import 'core/network_info.dart';
 import 'onBoarding/pages/splash_page.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = AppBlocObserver();
@@ -44,11 +47,20 @@ class MyApp extends StatelessWidget {
                 AuthenticationRemoteDataSourcesImpl(http.Client()),
           ),
           RepositoryProvider<AuthenticationRepository>(
-              create: (context) => AuthenticationRepositoryImpl(
-                    RepositoryProvider.of<AuthenticationRemoteDataSources>(
-                        context),
-                    RepositoryProvider.of<NetworkInfo>(context),
-                  )),
+            create: (context) => AuthenticationRepositoryImpl(
+              RepositoryProvider.of<AuthenticationRemoteDataSources>(context),
+              RepositoryProvider.of<NetworkInfo>(context),
+            ),
+          ),
+          RepositoryProvider<PlaceOrderRemoteDataSource>(
+            create: (context) => PlaceOrderRemoteDataSourceImpl(http.Client()),
+          ),
+          RepositoryProvider<PlaceOrderRepository>(
+            create: (context) => PlaceOrderRepositoryImpl(
+              RepositoryProvider.of<NetworkInfo>(context),
+              RepositoryProvider.of<PlaceOrderRemoteDataSource>(context),
+            ),
+          ),
         ],
         child: GlobalLoaderOverlay(
           useDefaultLoading: false,
